@@ -1,0 +1,76 @@
+Name     Trial ;
+PartNo   00 ;
+Date     2/23/2018 ;
+Revision 01 ;
+Designer Engineer ;
+Company  Jain Inc. ;
+Assembly None ;
+Location  ;
+Device   g22v10 ;
+
+/* *************** OUTPUT PINS *********************/
+/* decoder bits */
+PIN 23 = Q6;
+PIN 22 = Q7;
+PIN 21 = Q8;
+PIN 20 = Q9;
+/* counter bits */
+PIN 19 = A;
+PIN 18 = B;
+PIN 17 = C;
+PIN 16 = J;
+PIN 15 = E;
+PIN 14 = OEN;
+
+
+/* *************** INPUT PINS *********************/
+PIN 1 = clk;
+PIN 2 = I0;  /* Key 0 on the keypad */
+PIN 3 = I1;  /* Key 1 on the keypad */
+PIN 4 = I2;  /* Key 2 on the keypad */
+PIN 5 = I3;  /* Key 3 on the keypad */
+PIN 6 = I4;  /* Key 4 on the keypad */
+PIN 7 = I5;  /* Key 5 on the keypad */
+PIN 8 = I6;  /* Key 6 on the keypad */
+PIN 9 = I7;  /* Key 7 on the keypad */
+PIN 10 = I8; /* Key 8 on the keypad */
+PIN 11 = I9; /* Key 9 on the keypad */
+
+EN = !I0 & !I1 & !I2 & !I3 & !I4 & !I5 & !I6 & !I7 & !I8 & !I9;
+
+Q6 = 
+(I0 & !I1 & !I2 & !I3 & !I4 & !I5 & !I6 & !I7 & !I8 & !I9 #
+I2 & !I3 & !I4 & !I5 & !I6 & !I7 & !I8 & !I9 #
+I4 & !I5 & !I6 & !I7 & !I8 & !I9 #
+I6 & !I7 & !I8 & !I9 #
+I8 & !I9) & !EN;
+
+
+Q7 =
+(I1 & !I2 & !I3 & !I4 & !I5 & !I6 & !I7 & !I8 & !I9 #
+I2 & !I3 & !I4 & !I5 & !I6 & !I7 & !I8 & !I9 #
+I5 & !I6 & !I7 & !I8 & !I9 #
+I6 & !I7 & !I8 & !I9 #
+I9) & !EN;
+
+Q8 = 
+(I3 & !I4 & !I5 & !I6 & !I7 & !I8 & !I9 #
+I4 & !I5 & !I6 & !I7 & !I8 & !I9 #
+I5 & !I6 & !I7 & !I8 & !I9 #
+I6 & !I7 & !I8 & !I9) & !EN;
+
+Q9 = 
+(I7 & !I8 & !I9 #
+I8 & !I9 #
+I9) & !EN;
+
+
+E.D = !E;
+J.D = J & !E # !A & !J & E # !C & !J & E;
+C.D = C & !E # !A & C & !J # !C & J & E;
+B.D = B & !C # B & !J # B & !E # !B & C & J & E;
+A.D = A & !C # A & !E # B & C & J&  E;
+
+
+
+
